@@ -1,0 +1,51 @@
+package sample.model.bank;
+
+import sample.model.database.Connector;
+import sample.model.main.CheckData;
+
+import java.util.ArrayList;
+
+public class Bank {
+
+    CheckData check= new CheckData();
+    Connector x = new Connector();
+    ArrayList<Account> accounts = new ArrayList<>();
+
+    public void importFromDatabase() {
+        accounts=x.importFromDatabase();
+    }
+
+    public Account LogInCheck(int id,String password)
+    {
+        for(int i=0;i<accounts.size();i++)
+        {
+            if((accounts.get(i).getId()==id)&&(accounts.get(i).getPassword().equals(password)))
+            {
+                System.out.println("Welcome!");
+                return accounts.get(i);
+            }
+        }
+        System.out.println("Access denied");
+        return null;
+    }
+
+    public void createBankAccount() {
+        Person person = new Person(check.enterCheckName(),check.enterCheckSurname(),check.eneterCheckAge());
+        Account account = new Account(check.eneterCheckId(),check.enterPasswd(),person);
+        accounts.add(account);
+        //x.addToDatabase(account);
+    }
+    public void deleteBankAccount(Account account) {
+        x.delete(account.getId(), account.getPassword());
+        accounts.remove(account);
+    }
+
+    public void showAccountList()
+    {
+        for(int i=0;i<accounts.size();i++) {
+            System.out.println(accounts.get(i).getId()+" "+accounts.get(i).getPassword());
+        }
+    }
+
+
+}
