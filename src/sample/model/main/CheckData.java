@@ -37,17 +37,12 @@ public class CheckData {
         return surname;
     }
 
-    public String enterPasswd() {
-        String password;
-        System.out.println("Please enter your password");
-        password = scanner.next();
-        return password;
+    public String enterPasswd(String test) {
+        return test;
     }
 
-    public int eneterCheckId() {
-        int id=0;
-        System.out.println("Please enter your id");
-        id=scanner.nextInt();
+    public int eneterCheckId(String test) {
+        int id = Integer.valueOf(test);
         return id;
     }
 

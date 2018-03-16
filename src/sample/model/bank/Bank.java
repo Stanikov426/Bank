@@ -10,6 +10,7 @@ public class Bank {
     CheckData check= new CheckData();
     Connector x = new Connector();
     ArrayList<Account> accounts = new ArrayList<>();
+    Account pom;
 
     public void importFromDatabase() {
         accounts=x.importFromDatabase();
@@ -22,6 +23,7 @@ public class Bank {
             if((accounts.get(i).getId()==id)&&(accounts.get(i).getPassword().equals(password)))
             {
                 System.out.println("Welcome!");
+                pom = accounts.get(i);
                 return accounts.get(i);
             }
         }
@@ -30,9 +32,9 @@ public class Bank {
     }
 
     public void createBankAccount() {
-        Person person = new Person(check.enterCheckName(),check.enterCheckSurname(),check.eneterCheckAge());
-        Account account = new Account(check.eneterCheckId(),check.enterPasswd(),person);
-        accounts.add(account);
+        //Person person = new Person(check.enterCheckName(),check.enterCheckSurname(),check.eneterCheckAge());
+        //Account account = new Account(check.eneterCheckId(),check.enterPasswd(),person);
+        //accounts.add(account);
         //x.addToDatabase(account);
     }
     public void deleteBankAccount(Account account) {
@@ -46,6 +48,12 @@ public class Bank {
             System.out.println(accounts.get(i).getId()+" "+accounts.get(i).getPassword());
         }
     }
-
+    public void addAccount(Account test){
+        accounts.add(test);
+        pom = test;
+    }
+    public Account getAccount(){
+        return pom;
+    }
 
 }
