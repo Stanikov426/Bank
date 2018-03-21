@@ -13,8 +13,10 @@ public class Connector {
     public Connector() {
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/bankaccounts", "root", "");
+            String url = "jdbc:mysql://127.0.0.1:3306/test";
+            conn = DriverManager.getConnection(url, "root", "admin");
         } catch (Exception msg) {
+            System.out.println(msg.toString());
             System.out.println("Error!");
         }
     }

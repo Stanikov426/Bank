@@ -31,12 +31,6 @@ public class Bank {
         return null;
     }
 
-    public void createBankAccount() {
-        //Person person = new Person(check.enterCheckName(),check.enterCheckSurname(),check.eneterCheckAge());
-        //Account account = new Account(check.eneterCheckId(),check.enterPasswd(),person);
-        //accounts.add(account);
-        //x.addToDatabase(account);
-    }
     public void deleteBankAccount(Account account) {
         x.delete(account.getId(), account.getPassword());
         accounts.remove(account);
@@ -51,9 +45,14 @@ public class Bank {
     public void addAccount(Account test){
         accounts.add(test);
         pom = test;
+        x.addToDatabase(test);
     }
     public Account getAccount(){
         return pom;
+    }
+
+    public void edit(Account test){
+        x.edit(test);
     }
 
 }

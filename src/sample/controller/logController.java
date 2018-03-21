@@ -50,10 +50,7 @@ public class logController {
         CheckData test = new CheckData();
         int x = test.eneterCheckId(login.getText());
         System.out.println(x);
-        Person testPerson = new Person("Michal", "Stanisz", 20);
-        Account konto = new Account(111, "123", testPerson);
-        Main.test.addAccount(konto);
-        konto = Main.test.LogInCheck(x, passy.getText());
+        Account konto = Main.test.LogInCheck(x, passy.getText());
         if(konto!=null){
             stage = (Stage) loginButton.getScene().getWindow();
             Parent root = (Parent) FXMLLoader.load(getClass().getResource("/sample/view/accountPane.fxml"));

@@ -11,12 +11,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import sample.model.bank.Account;
+import sample.model.bank.Person;
 import sample.model.main.Main;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import static sample.model.main.Main.test;
 
 public class accountController implements Initializable {
     private Account pom;
@@ -38,6 +41,14 @@ public class accountController implements Initializable {
     private Label cashLabel;
 
     @FXML
+    private Button transferButton;
+
+    @FXML
+    void transferClick(ActionEvent event) {
+
+    }
+
+    @FXML
     void depoClick(ActionEvent event) {
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Deposit your money!");
@@ -46,7 +57,8 @@ public class accountController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
-            pom.setCash(pom.getCash() + Integer.valueOf(result.get().toString()));
+            pom.addCash(Integer.valueOf(result.get().toString()));
+            test.edit(pom);
             cashLabel.setText(Integer.valueOf(pom.getCash()).toString());
         }
     }
@@ -69,16 +81,18 @@ public class accountController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
-            pom.setCash(pom.getCash() - Integer.valueOf(result.get().toString()));
+            pom.removeCash(Integer.valueOf(result.get().toString()));
+            test.edit(pom);
             cashLabel.setText(Integer.valueOf(pom.getCash()).toString());
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        pom = Main.test.getAccount();
-        userLabel.setText(pom.getPerson().toString());
-        cashLabel.setText(Integer.valueOf(pom.getCash()).toString());
+        pom = test.getAccount();
+        Person pomPerson = pom.getPerson();
+        userLabel.setText("Name: " + pomPerson.getName() + " Surname: " + pomPerson.getSurname() + " Age: " + pomPerson.getAge());
+        cashLabel.setText("Cash: " + Integer.valueOf(pom.getCash()).toString());
     }
 
 }

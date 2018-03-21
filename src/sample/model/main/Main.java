@@ -12,6 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        test.importFromDatabase();
         Parent root = FXMLLoader.load(getClass().getResource("/sample/view/mainMenu.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setTitle("Bank System");

@@ -1,5 +1,6 @@
 package sample.model.bank;
 
+
 public class Account {
     private int id;
     private String password;
