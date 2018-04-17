@@ -7,22 +7,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.menuController">
    <children>
-      <Button fx:id="logButton" layoutX="261.0" layoutY="164.0" mnemonicParsing="false" onAction="#loginClick" text="Login">
+      <Button fx:id="logButton" layoutX="262.0" layoutY="188.0" mnemonicParsing="false" onAction="#loginClick" text="Login">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="regButton" layoutX="233.0" layoutY="232.0" mnemonicParsing="false" onAction="#regClick" text="Registration">
+      <Button fx:id="clientButton" layoutX="261.0" layoutY="252.0" mnemonicParsing="false" onAction="#clientClick" text="Client">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="271.0" layoutY="300.0" mnemonicParsing="false" onAction="#exitClick" text="Exit">
+      <Button layoutX="271.0" layoutY="310.0" mnemonicParsing="false" onAction="#exitClick" text="Exit">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Label layoutX="192.0" layoutY="50.0" text="Bank System">
+      <Label layoutX="191.0" layoutY="100.0" text="Bank System">
          <font>
             <Font size="39.0" />
          </font>

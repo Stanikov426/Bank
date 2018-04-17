@@ -19,7 +19,7 @@ public class menuController {
     private Button logButton;
 
     @FXML
-    private Button regButton;
+    private Button clientButton;
 
     @FXML
     void exitClick(ActionEvent event) {
@@ -28,20 +28,19 @@ public class menuController {
 
     @FXML
     void loginClick(ActionEvent event) throws IOException {
-        stage = (Stage) logButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/sample/view/logPane.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        openPane("/sample/view/logPane.fxml");
     }
 
     @FXML
-    void regClick(ActionEvent event) throws IOException {
-        stage = (Stage) regButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/sample/view/regPane.fxml"));
+    void clientClick(ActionEvent event) throws IOException {
+        openPane("/sample/view/clientPane.fxml");
+    }
+
+    private void openPane(String paneAdress) throws IOException {
+        stage = (Stage) logButton.getScene().getWindow();
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource(paneAdress));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-
 }

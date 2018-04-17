@@ -1,13 +1,11 @@
 package sample.model.bank;
 
 import sample.model.database.Connector;
-import sample.model.main.CheckData;
 
 import java.util.ArrayList;
 
 public class Bank {
 
-    CheckData check= new CheckData();
     Connector x = new Connector();
     ArrayList<Account> accounts = new ArrayList<>();
     Account pom;

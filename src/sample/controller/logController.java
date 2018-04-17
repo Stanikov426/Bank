@@ -10,13 +10,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.model.bank.Account;
-import sample.model.bank.Person;
-import sample.model.main.CheckData;
 import sample.model.main.Main;
 
 import java.io.IOException;
-
-import static sample.model.main.Main.test;
 
 
 public class logController {
@@ -47,8 +43,7 @@ public class logController {
 
     @FXML
     void loginClick(ActionEvent event) throws IOException {
-        CheckData test = new CheckData();
-        int x = test.eneterCheckId(login.getText());
+        int x = Integer.valueOf(login.getText());
         System.out.println(x);
         Account konto = Main.test.LogInCheck(x, passy.getText());
         if(konto!=null){
