@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.regCompanyController">
+   <children>
+      <Button fx:id="regButton" layoutX="329.0" layoutY="309.0" mnemonicParsing="false" onAction="#regClick" text="Register" />
+      <Label layoutX="145.0" layoutY="41.0" text="Registration Company">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button fx:id="backButton" layoutX="231.0" layoutY="309.0" mnemonicParsing="false" onAction="#backClick" text="Back" />
+      <TextField fx:id="comapnyName" layoutX="123.0" layoutY="112.0" />
+      <TextField fx:id="nip" layoutX="123.0" layoutY="153.0" />
+      <TextField fx:id="phone" layoutX="123.0" layoutY="194.0" />
+      <TextField fx:id="email" layoutX="123.0" layoutY="229.0" />
+      <Label layoutX="29.0" layoutY="116.0" text="Company name" />
+      <Label layoutX="85.0" layoutY="157.0" text="Nip" />
+      <Label layoutX="77.0" layoutY="198.0" text="Phone" />
+      <Label layoutX="77.0" layoutY="233.0" text="E-mail" />
+      <TextField fx:id="adress" layoutX="365.0" layoutY="112.0" />
+      <TextField fx:id="city" layoutX="365.0" layoutY="153.0" />
+      <TextField fx:id="zipcode" layoutX="365.0" layoutY="194.0" />
+      <Label layoutX="323.0" layoutY="116.0" text="Adress" />
+      <Label layoutX="331.0" layoutY="157.0" text="City" />
+      <Label layoutX="307.0" layoutY="198.0" text="Zip-code" />
+   </children>
+</AnchorPane>

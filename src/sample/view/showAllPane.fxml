@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.showAllController">
+   <children>
+      <Label layoutX="405.0" layoutY="14.0" text="Company">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="123.0" layoutY="14.0" text="Clients">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <TableView fx:id="clientsTable" layoutX="17.0" layoutY="61.0" prefHeight="274.0" prefWidth="288.0">
+        <columns>
+          <TableColumn fx:id="idClientColumn" prefWidth="38.0" text="Id" />
+            <TableColumn fx:id="nameColumn" prefWidth="64.0" text="Name" />
+            <TableColumn fx:id="surnameColumn" prefWidth="112.0" text="Surname" />
+          <TableColumn fx:id="cityColumn" prefWidth="73.0" text="City" />
+        </columns>
+      </TableView>
+      <TableView fx:id="companyTable" layoutX="319.0" layoutY="61.0" prefHeight="274.0" prefWidth="267.0">
+        <columns>
+          <TableColumn fx:id="idCompanyColumn" prefWidth="43.0" text="Id" />
+          <TableColumn fx:id="companyNameColumn" prefWidth="117.0" text="Company Name" />
+            <TableColumn fx:id="nipColumn" prefWidth="106.0" text="Nip" />
+        </columns>
+      </TableView>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="347.0" mnemonicParsing="false" onAction="#backClick" text="Back">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
