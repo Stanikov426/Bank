@@ -71,10 +71,11 @@ public class regController implements Initializable {
         Kontakt contact = new Kontakt(Integer.valueOf(phone.getText()), email.getText());
         Adres newAdress = new Adres(city.getText(), adress.getText(), zipcode.getText());
 
-        KlientPrywatny newClient = new KlientPrywatny(1, name.getText(), surname.getText(), Integer.valueOf(age.getText()));
+        KlientPrywatny newClient = new KlientPrywatny(idCounter, name.getText(), surname.getText(), Integer.valueOf(age.getText()));
         newClient.dodajKontakt(contact);
         newClient.dodajAdres(newAdress);
         addPrivClient(newClient);
+        idCounter++;
         //Person person = new Person(name.getText(),surname.getText(), Integer.valueOf(age.getText()));
         //Account account = new Account(Integer.valueOf(id.getText()), password.getText(), person);
         //Main.test.addAccount(account);

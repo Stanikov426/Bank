@@ -11,6 +11,31 @@ public class KlientFirmowy extends Klient {
     }
 
     public String info() {
-        return "" + getId() + " " + nazwaFirmy + " " + nip;
+        return "Id:" + getId() + " Name: " + nazwaFirmy + " Nip: " + nip;
+    }
+    public String getContactInfo(){
+        return contact.czytaj();
+    }
+    public String getAdressInfo(){
+        return adress.czytaj();
+    }
+
+    public String getNazwaFirmy() {
+        return nazwaFirmy;
+    }
+
+    public void setNazwaFirmy(String nazwaFirmy) {
+        this.nazwaFirmy = nazwaFirmy;
+    }
+
+    public int getNip() {
+        return nip;
+    }
+
+    public void setNip(int nip) {
+        this.nip = nip;
+    }
+    public String getStringNip(){
+        return String.valueOf(nip);
     }
 }

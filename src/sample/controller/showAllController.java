@@ -76,12 +76,29 @@ public class showAllController implements Initializable{
 
         clientsTable.setItems(getPrivateClientsList());
 
+        //Company
+        idCompanyColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getStringId()));
+        companyNameColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getNazwaFirmy()));
+        nipColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getStringNip()));
+
+        companyTable.setItems(getCompanyClientsList());
+
     }
 
     private ObservableList<KlientPrywatny> getPrivateClientsList() {
         ObservableList<KlientPrywatny> clientsList = FXCollections.observableArrayList();
         List<KlientPrywatny> clients = getPrivClients();
         for (KlientPrywatny num : clients) {
+            clientsList.add(num);
+        }
+
+        return clientsList;
+    }
+
+    private ObservableList<KlientFirmowy> getCompanyClientsList() {
+        ObservableList<KlientFirmowy> clientsList = FXCollections.observableArrayList();
+        List<KlientFirmowy> clients = getCompanyClients();
+        for (KlientFirmowy num : clients) {
             clientsList.add(num);
         }
 

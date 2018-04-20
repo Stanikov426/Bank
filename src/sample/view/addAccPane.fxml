@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.addAccController">
+   <children>
+      <Button fx:id="regButton" layoutX="339.0" layoutY="319.0" mnemonicParsing="false" onAction="#regClick" text="Register" />
+      <Label layoutX="196.0" layoutY="36.0" text="New Account">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button fx:id="backButton" layoutX="241.0" layoutY="319.0" mnemonicParsing="false" onAction="#backClick" text="Back" />
+      <TextField fx:id="accNumber" layoutX="241.0" layoutY="146.0" />
+      <TextField fx:id="startCash" layoutX="241.0" layoutY="220.0" />
+      <Label layoutX="132.0" layoutY="151.0" text="Account number" />
+      <Label layoutX="174.0" layoutY="192.0" text="Password" />
+      <Label layoutX="171.0" layoutY="225.0" text="Initial cash" />
+      <Label layoutX="131.0" layoutY="257.0" text="Currency of cash" />
+      <ChoiceBox fx:id="accountType" layoutX="241.0" layoutY="105.0" prefHeight="27.0" prefWidth="167.0" />
+      <Label layoutX="154.0" layoutY="110.0" text="Account type" />
+      <PasswordField fx:id="password" layoutX="241.0" layoutY="186.0" />
+      <ChoiceBox fx:id="currencyOfCash" layoutX="241.0" layoutY="252.0" prefHeight="27.0" prefWidth="167.0" />
+      <Label layoutX="245.0" layoutY="279.0" text="Only for currency account" />
+   </children>
+</AnchorPane>

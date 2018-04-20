@@ -41,6 +41,12 @@ public class KlientPrywatny extends Klient {
     }
 
     public String info() {
-        return "" + getId() + " " + imie + " " + nazwisko + " " + age + " " + adress.czytaj() + " " + contact.czytaj();
+        return "Id:" + getId() + " Name: " + imie + " " + nazwisko + " Age: " + age;
+    }
+    public String getContactInfo(){
+        return contact.czytaj();
+    }
+    public String getAdressInfo(){
+        return adress.czytaj();
     }
 }

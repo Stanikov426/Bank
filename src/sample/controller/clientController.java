@@ -6,13 +6,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
+
+import static sample.model.main.Main.test;
 
 public class clientController {
 
     private Stage stage;
+    public static int pomId;
 
     @FXML
     private Button backButton;
@@ -43,8 +48,17 @@ public class clientController {
     }
 
     @FXML
-    void showCllientClick(ActionEvent event) {
+    void showCllientClick(ActionEvent event) throws IOException {
+        TextInputDialog dialog = new TextInputDialog("0");
+        dialog.setTitle("Show client");
+        dialog.setHeaderText("Find client by id");
+        dialog.setContentText("Please id:");
 
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            pomId = Integer.valueOf(result.get().toString());
+            openPane("/sample/view/showClientPane.fxml");
+        }
     }
 
     private void openPane(String paneAdress) throws IOException {

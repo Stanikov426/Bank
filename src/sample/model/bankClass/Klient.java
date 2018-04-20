@@ -20,6 +20,10 @@ public abstract class Klient {
         return id;
     }
 
+    public String getStringId() {
+        return String.valueOf(id);
+    }
+
     public void dodajKontakt(Kontakt kontakt){
         contact = kontakt;
     }
