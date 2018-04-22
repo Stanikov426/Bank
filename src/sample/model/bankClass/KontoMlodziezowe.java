@@ -6,5 +6,6 @@ public class KontoMlodziezowe extends Konto {
 
     public KontoMlodziezowe(int numerKonta, String haslo, double srodki){
         super(numerKonta, haslo, srodki);
+        setType("For Young");
     }
 }

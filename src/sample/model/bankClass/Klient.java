@@ -1,19 +1,21 @@
 package sample.model.bankClass;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public abstract class Klient {
     private int id;
     protected Kontakt contact;
     protected Adres adress;
-    private Set<Konto> konta;
-    private Set<Operacje> operacje;
+    private List<Konto> konta;
+    private List<Operacje> operacje;
 
     public Klient(int id){
         this.id = id;
-        konta = new HashSet<Konto>();
-        operacje = new HashSet<Operacje>();
+        konta = new LinkedList<>();
+        operacje = new LinkedList<>();
     }
 
     public int getId() {
@@ -28,9 +30,18 @@ public abstract class Klient {
         contact = kontakt;
     }
 
+    public Kontakt getContact() {
+        return contact;
+    }
+
     public void dodajAdres(Adres pomAdres){
         adress = pomAdres;
     }
+
+    public Adres getAdress() {
+        return adress;
+    }
+
     public String getCity(){
         return adress.getMiasto();
     }
@@ -55,5 +66,9 @@ public abstract class Klient {
 
     public String info(){
         return "" + id;
+    }
+
+    public List<Konto> getKonta() {
+        return konta;
     }
 }

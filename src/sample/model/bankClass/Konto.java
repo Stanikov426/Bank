@@ -5,7 +5,9 @@ import java.util.Set;
 
 public class Konto {
     private double srodki;
+    private String currency = "PLN";
     private int numerKonta;
+    private String type;
     private String haslo;
     private Set<Operacje> operacje;
 
@@ -13,6 +15,7 @@ public class Konto {
         this.numerKonta = numerKonta;
         this.haslo = haslo;
         this.srodki = srodki;
+        setType("Standard");
         operacje = new HashSet<Operacje>();
     }
 
@@ -24,8 +27,8 @@ public class Konto {
         this.srodki = srodki;
     }
 
-    public void pokazSrodki(){
-        System.out.println("Srodki: " + getSrodki() + "PLN");
+    public String pokazSrodki(){
+        return "" + srodki+currency;
     }
     public void dodajOperacje(Operacje operacja){
         operacje.add(operacja);
@@ -34,5 +37,21 @@ public class Konto {
         for (Operacje pomOpercaje: operacje) {
             pomOpercaje.pokaz();
         }
+    }
+
+    public String getStringNumerKonta() {
+        return "" + numerKonta;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType(){
+        return type;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

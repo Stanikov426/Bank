@@ -21,6 +21,8 @@ import static sample.model.main.Main.*;
 
 public class showClientController implements Initializable {
     private Stage stage;
+    public static KlientPrywatny pomClient;
+    public static KlientFirmowy pomCompany;
 
     @FXML
     private Label infoLabel;
@@ -36,17 +38,13 @@ public class showClientController implements Initializable {
 
 
     @FXML
-    void addAccClick(ActionEvent event) {
-
+    void addAccClick(ActionEvent event) throws IOException {
+        openPane("/sample/view/addAccPane.fxml");
     }
 
     @FXML
     void backClick(ActionEvent event) throws IOException {
-        stage = (Stage) backButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/sample/view/clientPane.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        openPane("/sample/view/clientPane.fxml");
     }
 
     @FXML
@@ -55,19 +53,19 @@ public class showClientController implements Initializable {
     }
 
     @FXML
-    void editContactClick(ActionEvent event) {
-
+    void editContactClick(ActionEvent event) throws IOException {
+        openPane("/sample/view/editContactPane.fxml");
     }
 
     @FXML
-    void showAllClick(ActionEvent event) {
-
+    void showAllClick(ActionEvent event) throws IOException {
+        openPane("/sample/view/showAccPane.fxml");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        KlientPrywatny pomClient = getPrivClientById(pomId);
-        KlientFirmowy pomCompany = getCompanyById(pomId);
+        pomClient = getPrivClientById(pomId);
+        pomCompany = getCompanyById(pomId);
         if(pomClient!=null){
             infoLabel.setText(pomClient.info());
             adresLabel.setText(pomClient.getAdressInfo());
@@ -78,5 +76,12 @@ public class showClientController implements Initializable {
             adresLabel.setText(pomCompany.getAdressInfo());
             contactLabel.setText(pomCompany.getContactInfo());
         }
+    }
+    private void openPane(String paneAdress) throws IOException {
+        stage = (Stage) backButton.getScene().getWindow();
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource(paneAdress));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

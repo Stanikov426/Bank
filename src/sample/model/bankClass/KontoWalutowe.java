@@ -6,9 +6,8 @@ public class KontoWalutowe extends Konto {
     public KontoWalutowe(int numerKonta, String haslo, double srodki, String waluta){
         super(numerKonta, haslo, srodki);
         this.waluta = waluta;
+        setType("Currency");
+        setCurrency(waluta);
     }
 
-    public void pokazSrodki(){
-        System.out.println("Srodki: " + getSrodki() + waluta);
-    }
 }

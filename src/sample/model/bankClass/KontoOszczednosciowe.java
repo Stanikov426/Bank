@@ -5,5 +5,6 @@ public class KontoOszczednosciowe extends Konto {
 
     public KontoOszczednosciowe(int numerKonta, String haslo, double srodki){
         super(numerKonta, haslo, srodki);
+        setType("Savings");
     }
 }

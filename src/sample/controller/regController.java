@@ -59,9 +59,6 @@ public class regController implements Initializable {
     private TextField adress;
 
     @FXML
-    private ChoiceBox<String> accountType;
-
-    @FXML
     void backClick(ActionEvent event) throws IOException {
         back();
     }
@@ -76,9 +73,7 @@ public class regController implements Initializable {
         newClient.dodajAdres(newAdress);
         addPrivClient(newClient);
         idCounter++;
-        //Person person = new Person(name.getText(),surname.getText(), Integer.valueOf(age.getText()));
-        //Account account = new Account(Integer.valueOf(id.getText()), password.getText(), person);
-        //Main.test.addAccount(account);
+
         back();
     }
     private void back() throws IOException {
@@ -91,6 +86,5 @@ public class regController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        accountType.getItems().addAll("Standard", "For Young", "Savings", "Currency");
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.editContactController">
+   <children>
+      <TextField fx:id="phone" layoutX="121.0" layoutY="168.0" />
+      <TextField fx:id="email" layoutX="121.0" layoutY="200.0" />
+      <TextField fx:id="adress" layoutX="377.0" layoutY="164.0" />
+      <TextField fx:id="city" layoutX="377.0" layoutY="205.0" />
+      <TextField fx:id="zipcode" layoutX="377.0" layoutY="246.0" />
+      <Label layoutX="335.0" layoutY="168.0" text="Adress" />
+      <Label layoutX="343.0" layoutY="209.0" text="City" />
+      <Label layoutX="319.0" layoutY="250.0" text="Zip-code" />
+      <Label layoutX="75.0" layoutY="172.0" text="Phone" />
+      <Label layoutX="75.0" layoutY="204.0" text="E-mail" />
+      <Label layoutX="211.0" layoutY="46.0" text="Edit Contact">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button fx:id="saveButton" layoutX="319.0" layoutY="315.0" mnemonicParsing="false" onAction="#saveClick" text="Save" />
+      <Button fx:id="backButton" layoutX="221.0" layoutY="315.0" mnemonicParsing="false" onAction="#backClick" text="Back" />
+      <Label layoutX="69.0" layoutY="128.0" text="Tip: Fill in only what you want to change">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
