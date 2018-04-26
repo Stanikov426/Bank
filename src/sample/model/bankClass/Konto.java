@@ -1,6 +1,8 @@
 package sample.model.bankClass;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class Konto {
@@ -9,14 +11,14 @@ public class Konto {
     private int numerKonta;
     private String type;
     private String haslo;
-    private Set<Operacje> operacje;
+    private List<Operacja> operacje;
 
     public Konto(int numerKonta, String haslo, double srodki){
         this.numerKonta = numerKonta;
         this.haslo = haslo;
         this.srodki = srodki;
         setType("Standard");
-        operacje = new HashSet<Operacje>();
+        operacje = new LinkedList<>();
     }
 
     public double getSrodki() {
@@ -30,11 +32,11 @@ public class Konto {
     public String pokazSrodki(){
         return "" + srodki+currency;
     }
-    public void dodajOperacje(Operacje operacja){
-        operacje.add(operacja);
+    public void dodajOperacje(Operacja operacja){
+        this.operacje.add(operacja);
     }
     public void pokazOperacje(){
-        for (Operacje pomOpercaje: operacje) {
+        for (Operacja pomOpercaje: operacje) {
             pomOpercaje.pokaz();
         }
     }
@@ -54,4 +56,38 @@ public class Konto {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public Boolean checkNumberAndPassword(int accNumber, String password){
+        if(numerKonta==accNumber && haslo.equals(password)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public Boolean checkNumber(int accNumber){
+        if(numerKonta==accNumber){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public void depositCash(double howMuch){
+        srodki= srodki+howMuch;
+    }
+    public Boolean withdrawCash(double howMuch){
+        if(howMuch>srodki){
+            return false;
+        }
+        else {
+            srodki= srodki - howMuch;
+            return true;
+        }
+    }
+
 }

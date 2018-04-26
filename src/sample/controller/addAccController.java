@@ -83,7 +83,8 @@ public class addAccController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         if(pomClient!=null){
             accountType.getItems().addAll("Standard", "For Young", "Savings", "Currency");
-            currencyOfCash.getItems().addAll("EUR", "USD","GBP", "RUB", "JPY", "SEK");
+            currencyOfCash.getItems().addAll("PLN", "EUR", "USD","GBP", "RUB", "JPY", "SEK");
+            currencyOfCash.setValue("PLN");
         }
         else{
             accountType.getItems().addAll("Standard Company");

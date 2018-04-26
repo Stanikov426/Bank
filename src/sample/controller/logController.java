@@ -10,15 +10,20 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.model.bank.Account;
+import sample.model.bankClass.Klient;
+import sample.model.bankClass.Konto;
 import sample.model.main.Main;
 
 import java.io.IOException;
 
+import static sample.model.main.Main.loginAcc;
+import static sample.model.main.Main.loginClient;
+
 
 public class logController {
-    private final String testLogin = "stanikov";
-    private final String pass = "123456";
     private Stage stage;
+    private static Konto logAcc;
+    private static Klient logClient;
 
     @FXML
     private TextField login;
@@ -44,14 +49,22 @@ public class logController {
     @FXML
     void loginClick(ActionEvent event) throws IOException {
         int x = Integer.valueOf(login.getText());
-        System.out.println(x);
-        Account konto = Main.test.LogInCheck(x, passy.getText());
-        if(konto!=null){
+        logAcc = loginAcc(x, passy.getText());
+        if(logAcc!=null){
+            logClient = loginClient(x, passy.getText());
             stage = (Stage) loginButton.getScene().getWindow();
             Parent root = (Parent) FXMLLoader.load(getClass().getResource("/sample/view/accountPane.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         }
+    }
+
+    public static Konto getLogAcc() {
+        return logAcc;
+    }
+
+    public static Klient getLogClient() {
+        return logClient;
     }
 }

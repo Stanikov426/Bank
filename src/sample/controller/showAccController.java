@@ -64,7 +64,7 @@ public class showAccController implements Initializable {
         else{
             headLabel.setText(pomCompany.getNazwaFirmy()+" Accounts");
         }
-        //Clients
+
         typeColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getType()));
         numberColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getStringNumerKonta()));
         cashColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().pokazSrodki()));

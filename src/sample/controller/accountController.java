@@ -12,18 +12,26 @@ import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import sample.model.bank.Account;
 import sample.model.bank.Person;
+import sample.model.bankClass.Klient;
+import sample.model.bankClass.KlientPrywatny;
+import sample.model.bankClass.Konto;
+import sample.model.bankClass.Operacja;
 import sample.model.main.Main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static sample.controller.logController.getLogAcc;
+import static sample.controller.logController.getLogClient;
 import static sample.model.main.Main.test;
 
 public class accountController implements Initializable {
-    private Account pom;
     private Stage stage;
+    private Konto pomAcc;
+    private Klient pomClient;
 
     @FXML
     private Button depoButton;
@@ -44,8 +52,12 @@ public class accountController implements Initializable {
     private Button transferButton;
 
     @FXML
-    void transferClick(ActionEvent event) {
-
+    void transferClick(ActionEvent event) throws IOException {
+        stage = (Stage) logoutButton.getScene().getWindow();
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/sample/view/transferPane.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -57,10 +69,13 @@ public class accountController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
-            pom.addCash(Integer.valueOf(result.get().toString()));
-            test.edit(pom);
-            cashLabel.setText(Integer.valueOf(pom.getCash()).toString());
+            pomAcc.depositCash(Double.valueOf(result.get().toString()));
+            refreshCashLabel();
         }
+        Date date = new Date();
+        Operacja newOperation = new Operacja(pomClient, pomAcc, date, "Deposit "+result.get().toString()+" money");
+        pomAcc.dodajOperacje(newOperation);
+        pomClient.dodajOperacje(newOperation);
     }
 
     @FXML
@@ -81,18 +96,24 @@ public class accountController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
-            pom.removeCash(Integer.valueOf(result.get().toString()));
-            test.edit(pom);
-            cashLabel.setText(Integer.valueOf(pom.getCash()).toString());
+            if(pomAcc.withdrawCash(Double.valueOf(result.get().toString()))){
+                Date date = new Date();
+                Operacja newOperation = new Operacja(pomClient, pomAcc, date, "Withdraw "+result.get().toString()+" money");
+                pomAcc.dodajOperacje(newOperation);
+                pomClient.dodajOperacje(newOperation);
+            }
+            refreshCashLabel();
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        pom = test.getAccount();
-        Person pomPerson = pom.getPerson();
-        userLabel.setText("Name: " + pomPerson.getName() + " Surname: " + pomPerson.getSurname() + " Age: " + pomPerson.getAge());
-        cashLabel.setText("Cash: " + Integer.valueOf(pom.getCash()).toString());
+        pomAcc = getLogAcc();
+        pomClient = getLogClient();
+        userLabel.setText("The owner of account is client id: " + pomClient.getId());
+        refreshCashLabel();
     }
-
+    private void refreshCashLabel(){
+        cashLabel.setText("Cash on your account: " + Double.valueOf(pomAcc.getSrodki())+pomAcc.getCurrency());
+    }
 }

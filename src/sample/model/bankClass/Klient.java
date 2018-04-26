@@ -1,16 +1,14 @@
 package sample.model.bankClass;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public abstract class Klient {
     private int id;
     protected Kontakt contact;
     protected Adres adress;
     private List<Konto> konta;
-    private List<Operacje> operacje;
+    private List<Operacja> operacje;
 
     public Klient(int id){
         this.id = id;
@@ -55,11 +53,11 @@ public abstract class Klient {
             pomKonto.pokazSrodki();
         }
     }
-    public void dodajOperacje(Operacje operacja){
-        operacje.add(operacja);
+    public void dodajOperacje(Operacja operacja){
+        this.operacje.add(operacja);
     }
     public void pokazOperacje(){
-        for (Operacje pomOpercaje: operacje) {
+        for (Operacja pomOpercaje: operacje) {
             pomOpercaje.pokaz();
         }
     }
@@ -70,5 +68,22 @@ public abstract class Klient {
 
     public List<Konto> getKonta() {
         return konta;
+    }
+
+    public Konto findAcc(int accNumber, String password){
+        for(Konto pom:konta){
+            if(pom.checkNumberAndPassword(accNumber, password)){
+                return pom;
+            }
+        }
+        return null;
+    }
+    public Konto findAcc(int accNumber){
+        for(Konto pom:konta){
+            if(pom.checkNumber(accNumber)){
+                return pom;
+            }
+        }
+        return null;
     }
 }

@@ -6,10 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.model.bank.Bank;
-import sample.model.bankClass.Adres;
-import sample.model.bankClass.KlientFirmowy;
-import sample.model.bankClass.KlientPrywatny;
-import sample.model.bankClass.Kontakt;
+import sample.model.bankClass.*;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -78,5 +75,56 @@ public class Main extends Application {
         }
         return null;
     }
-
+    public static Konto loginAcc(int accNumber, String password){
+        for (Klient pom: privClients) {
+            if(pom.findAcc(accNumber, password)!=null){
+                return pom.findAcc(accNumber, password);
+            }
+        }
+        for (Klient pom: companyClients) {
+            if(pom.findAcc(accNumber, password)!=null){
+                return pom.findAcc(accNumber, password);
+            }
+        }
+        return null;
+    }
+    public static Klient loginClient(int accNumber, String password){
+        for (Klient pom: privClients) {
+            if(pom.findAcc(accNumber, password)!=null){
+                return pom;
+            }
+        }
+        for (Klient pom: companyClients) {
+            if(pom.findAcc(accNumber, password)!=null){
+                return pom;
+            }
+        }
+        return null;
+    }
+    public static Konto getAccByNumber(int accNumber){
+        for (Klient pom: privClients) {
+            if(pom.findAcc(accNumber)!=null){
+                return pom.findAcc(accNumber);
+            }
+        }
+        for (Klient pom: companyClients) {
+            if(pom.findAcc(accNumber)!=null){
+                return pom.findAcc(accNumber);
+            }
+        }
+        return null;
+    }
+    public static Klient getClientByAccNumber(int accNumber){
+        for (Klient pom: privClients) {
+            if(pom.findAcc(accNumber)!=null){
+                return pom;
+            }
+        }
+        for (Klient pom: companyClients) {
+            if(pom.findAcc(accNumber)!=null){
+                return pom;
+            }
+        }
+        return null;
+    }
 }
