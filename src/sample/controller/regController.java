@@ -7,10 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import sample.model.bank.Account;
 import sample.model.bank.Person;
@@ -65,16 +62,32 @@ public class regController implements Initializable {
 
     @FXML
     void regClick(ActionEvent event) throws IOException {
-        Kontakt contact = new Kontakt(Integer.valueOf(phone.getText()), email.getText());
-        Adres newAdress = new Adres(city.getText(), adress.getText(), zipcode.getText());
+        if(checkTextField()){
+            Kontakt contact;
+            try{
+                contact = new Kontakt(Integer.valueOf(phone.getText()), email.getText());
+            }catch(NumberFormatException error){
+                showError("Something is wrong with phone number");
+                return;
+            }
+            Adres newAdress = new Adres(city.getText(), adress.getText(), zipcode.getText());
 
-        KlientPrywatny newClient = new KlientPrywatny(idCounter, name.getText(), surname.getText(), Integer.valueOf(age.getText()));
-        newClient.dodajKontakt(contact);
-        newClient.dodajAdres(newAdress);
-        addPrivClient(newClient);
-        idCounter++;
+            try {
+                KlientPrywatny newClient = new KlientPrywatny(idCounter, name.getText(), surname.getText(), Integer.valueOf(age.getText()));
+                newClient.dodajKontakt(contact);
+                newClient.dodajAdres(newAdress);
+                addPrivClient(newClient);
+            }catch (NumberFormatException error){
+                showError("Not correct value of age");
+                return;
+            }
+            idCounter++;
 
-        back();
+            back();
+        }
+        else{
+            showError("Fill all informations");
+        }
     }
     private void back() throws IOException {
         stage = (Stage) backButton.getScene().getWindow();
@@ -86,5 +99,23 @@ public class regController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    }
+
+    private void showError(String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error!!!");
+        alert.setHeaderText("Something is wrong");
+        alert.setContentText(message);
+
+        alert.showAndWait();
+    }
+    private Boolean checkTextField(){
+        if(name.getText().equals("")||surname.getText().equals("")||age.getText().equals("")||phone.getText().equals("")||
+                email.getText().equals("")||zipcode.getText().equals("")||adress.getText().equals("")||city.getText().equals("")){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 }

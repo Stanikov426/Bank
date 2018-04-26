@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import sample.model.bankClass.Konto;
 import sample.model.bankClass.KontoOszczednosciowe;
@@ -21,6 +18,7 @@ import java.util.ResourceBundle;
 
 import static sample.controller.showClientController.pomClient;
 import static sample.controller.showClientController.pomCompany;
+import static sample.model.main.Main.getAccByNumber;
 
 public class addAccController implements Initializable {
     private Stage stage;
@@ -54,27 +52,41 @@ public class addAccController implements Initializable {
 
     @FXML
     void regClick(ActionEvent event) throws IOException {
-        if(accountType.getValue().equals("Standard")){
-            newAcc = new Konto(Integer.valueOf(accNumber.getText()), password.getText(), Double.valueOf(startCash.getText()));
-            pomClient.dodajKonto(newAcc);
-        }
-        else if(accountType.getValue().equals("For Young")){
+        if(checkTextField()){
+            if(accountType.getValue().equals("Standard")){
+                try{
+                    if(checkAccNumber(Integer.valueOf(accNumber.getText()))){
+                        newAcc = new Konto(Integer.valueOf(accNumber.getText()), password.getText(), Double.valueOf(startCash.getText()));
+                        pomClient.dodajKonto(newAcc);
+                    }else{
+                        showError("This account number is busy");
+                        return;
+                    }
+                }catch (NumberFormatException error){
+                    showError("Bad type of account number or nip");
+                    return;
+                }
+            }
+            else if(accountType.getValue().equals("For Young")){
 
-        }
-        else if(accountType.getValue().equals("Savings")){
-            newAcc = new KontoOszczednosciowe(Integer.valueOf(accNumber.getText()), password.getText(), Double.valueOf(startCash.getText()));
-            pomClient.dodajKonto(newAcc);
-        }
-        else if(accountType.getValue().equals("Currency")){
-            newAcc = new KontoWalutowe(Integer.valueOf(accNumber.getText()), password.getText(), Double.valueOf(startCash.getText()), currencyOfCash.getValue());
-            pomClient.dodajKonto(newAcc);
-        }
-        else if(accountType.getValue().equals("Standard Company")){
-            newAcc = new Konto(Integer.valueOf(accNumber.getText()), password.getText(), Double.valueOf(startCash.getText()));
-            pomCompany.dodajKonto(newAcc);
-        }
-        else{
-            //error
+            }
+            else if(accountType.getValue().equals("Savings")){
+                newAcc = new KontoOszczednosciowe(Integer.valueOf(accNumber.getText()), password.getText(), Double.valueOf(startCash.getText()));
+                pomClient.dodajKonto(newAcc);
+            }
+            else if(accountType.getValue().equals("Currency")){
+                newAcc = new KontoWalutowe(Integer.valueOf(accNumber.getText()), password.getText(), Double.valueOf(startCash.getText()), currencyOfCash.getValue());
+                pomClient.dodajKonto(newAcc);
+            }
+            else if(accountType.getValue().equals("Standard Company")){
+                newAcc = new Konto(Integer.valueOf(accNumber.getText()), password.getText(), Double.valueOf(startCash.getText()));
+                pomCompany.dodajKonto(newAcc);
+            }
+            else{
+                showError("Wrong account type");
+            }
+        }else{
+            showError("Fill all informations");
         }
         back();
     }
@@ -85,9 +97,11 @@ public class addAccController implements Initializable {
             accountType.getItems().addAll("Standard", "For Young", "Savings", "Currency");
             currencyOfCash.getItems().addAll("PLN", "EUR", "USD","GBP", "RUB", "JPY", "SEK");
             currencyOfCash.setValue("PLN");
+            accountType.setValue("Standard");
         }
         else{
             accountType.getItems().addAll("Standard Company");
+            accountType.setValue("Standard Company");
         }
     }
 
@@ -97,5 +111,31 @@ public class addAccController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private Boolean checkTextField(){
+        if(accNumber.getText().equals("")||password.getText().equals("")||startCash.getText().equals("")){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    private Boolean checkAccNumber(int accNumber){
+        if(getAccByNumber(accNumber)==null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    private void showError(String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error!!!");
+        alert.setHeaderText("Something is wrong");
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 }

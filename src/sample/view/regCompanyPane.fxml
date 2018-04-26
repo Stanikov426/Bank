@@ -15,7 +15,7 @@
          </font>
       </Label>
       <Button fx:id="backButton" layoutX="231.0" layoutY="309.0" mnemonicParsing="false" onAction="#backClick" text="Back" />
-      <TextField fx:id="comapnyName" layoutX="123.0" layoutY="112.0" />
+      <TextField fx:id="companyName" layoutX="123.0" layoutY="112.0" />
       <TextField fx:id="nip" layoutX="123.0" layoutY="153.0" />
       <TextField fx:id="phone" layoutX="123.0" layoutY="194.0" />
       <TextField fx:id="email" layoutX="123.0" layoutY="229.0" />

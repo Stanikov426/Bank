@@ -5,18 +5,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.model.bankClass.Adres;
 import sample.model.bankClass.KlientFirmowy;
-import sample.model.bankClass.KlientPrywatny;
 import sample.model.bankClass.Kontakt;
 
 import java.io.IOException;
 
 import static sample.model.main.Main.addCompanyClient;
-import static sample.model.main.Main.addPrivClient;
 import static sample.model.main.Main.idCounter;
 
 public class regCompanyController {
@@ -29,7 +28,7 @@ public class regCompanyController {
     private Button backButton;
 
     @FXML
-    private TextField comapnyName;
+    private TextField companyName;
 
     @FXML
     private TextField nip;
@@ -56,15 +55,31 @@ public class regCompanyController {
 
     @FXML
     void regClick(ActionEvent event) throws IOException {
-        Kontakt contact = new Kontakt(Integer.valueOf(phone.getText()), email.getText());
-        Adres newAdress = new Adres(city.getText(), adress.getText(), zipcode.getText());
+        if(checkTextField()){
+            Kontakt contact;
+            try{
+                contact = new Kontakt(Integer.valueOf(phone.getText()), email.getText());
+            }catch(NumberFormatException error){
+                showError("Something is wrong with phone number");
+                return;
+            }
+            Adres newAdress = new Adres(city.getText(), adress.getText(), zipcode.getText());
 
-        KlientFirmowy newClient = new KlientFirmowy(idCounter, comapnyName.getText(), Integer.valueOf(nip.getText()));
-        newClient.dodajKontakt(contact);
-        newClient.dodajAdres(newAdress);
-        addCompanyClient(newClient);
-        idCounter++;
-        back();
+            try{
+                KlientFirmowy newClient = new KlientFirmowy(idCounter, companyName.getText(), Integer.valueOf(nip.getText()));
+                newClient.dodajKontakt(contact);
+                newClient.dodajAdres(newAdress);
+                addCompanyClient(newClient);
+            }catch (NumberFormatException error){
+                showError("Not correct value of nip");
+                return;
+            }
+            idCounter++;
+            back();
+        }
+        else {
+            showError("Fill all informations");
+        }
     }
     private void back() throws IOException {
         stage = (Stage) backButton.getScene().getWindow();
@@ -72,5 +87,22 @@ public class regCompanyController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    private void showError(String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error!!!");
+        alert.setHeaderText("Something is wrong");
+        alert.setContentText(message);
+
+        alert.showAndWait();
+    }
+    private Boolean checkTextField(){
+        if(companyName.getText().equals("")||nip.getText().equals("")||phone.getText().equals("")||
+                email.getText().equals("")||zipcode.getText().equals("")||adress.getText().equals("")||city.getText().equals("")){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 }
