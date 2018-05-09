@@ -10,13 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
-import sample.model.bank.Account;
-import sample.model.bank.Person;
 import sample.model.bankClass.Klient;
-import sample.model.bankClass.KlientPrywatny;
 import sample.model.bankClass.Konto;
 import sample.model.bankClass.Operacja;
-import sample.model.main.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +22,6 @@ import java.util.ResourceBundle;
 
 import static sample.controller.logController.getLogAcc;
 import static sample.controller.logController.getLogClient;
-import static sample.model.main.Main.test;
 
 public class accountController implements Initializable {
     private Stage stage;
@@ -52,6 +47,15 @@ public class accountController implements Initializable {
     private Button transferButton;
 
     @FXML
+    void accOperationsClick(ActionEvent event) throws IOException {
+        stage = (Stage) logoutButton.getScene().getWindow();
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/sample/view/accountOperationsPane.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
     void transferClick(ActionEvent event) throws IOException {
         stage = (Stage) logoutButton.getScene().getWindow();
         Parent root = (Parent) FXMLLoader.load(getClass().getResource("/sample/view/transferPane.fxml"));
@@ -69,11 +73,11 @@ public class accountController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
-            pomAcc.depositCash(Double.valueOf(result.get().toString()));
+            pomAcc.depositCash(Double.valueOf(result.get()));
             refreshCashLabel();
         }
         Date date = new Date();
-        Operacja newOperation = new Operacja(pomClient, pomAcc, date, "Deposit "+result.get().toString()+" money");
+        Operacja newOperation = new Operacja(pomAcc,pomAcc, date, "Deposit "+Double.valueOf(result.get())+" money");
         pomAcc.dodajOperacje(newOperation);
         pomClient.dodajOperacje(newOperation);
     }
@@ -98,7 +102,7 @@ public class accountController implements Initializable {
         if (result.isPresent()) {
             if(pomAcc.withdrawCash(Double.valueOf(result.get().toString()))){
                 Date date = new Date();
-                Operacja newOperation = new Operacja(pomClient, pomAcc, date, "Withdraw "+result.get().toString()+" money");
+                Operacja newOperation = new Operacja(pomAcc, pomAcc, date, "Withdraw "+Double.valueOf(result.get())+" money");
                 pomAcc.dodajOperacje(newOperation);
                 pomClient.dodajOperacje(newOperation);
             }

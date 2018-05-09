@@ -54,13 +54,15 @@ public class transferController implements Initializable{
             recipientAcc = getAccByNumber(Integer.valueOf(toID.getText()));
             recipientClient = getClientByAccNumber(Integer.valueOf(toID.getText()));
             if(sendAcc.withdrawCash(Double.valueOf(sendMoney.getText()))&& !sendAcc.equals(recipientAcc) /*!sendClient.equals(recipientClient)*/){
-                recipientAcc.depositCash(Double.valueOf(sendMoney.getText()));
                 Date date = new Date();
-                Operacja newOperation = new Operacja(sendClient, recipientClient, sendAcc, recipientAcc, date, "Transfer to "+ recipientAcc.getStringNumerKonta()+", money " +sendMoney.toString());
+                Operacja newOperation = new Operacja(sendAcc, recipientAcc, date, "Transfer money " +Double.valueOf(sendMoney.getText()));
+                recipientAcc.depositCash(Double.valueOf(sendMoney.getText()));
+                Operacja depositOperation = new Operacja(recipientAcc,recipientAcc, date, "Get " + Double.valueOf(sendMoney.getText()) + " money from acc number "+sendAcc.getStringNumerKonta());
+
                 sendAcc.dodajOperacje(newOperation);
                 sendClient.dodajOperacje(newOperation);
-                recipientAcc.dodajOperacje(newOperation);
-                recipientClient.dodajOperacje(newOperation);
+                recipientAcc.dodajOperacje(depositOperation);
+                recipientClient.dodajOperacje(depositOperation);
             }else if(sendAcc.equals(recipientAcc) ){
                 showError("You can send money to same account");
             }else{

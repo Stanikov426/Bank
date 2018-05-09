@@ -1,19 +1,20 @@
 package sample.model.bankClass;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class Klient {
+public abstract class Klient implements Serializable {
     private int id;
     protected Kontakt contact;
     protected Adres adress;
     private List<Konto> konta;
-    private List<Operacja> operacje;
+    private List<Operacja> operacjeKlienta;
 
     public Klient(int id){
         this.id = id;
         konta = new LinkedList<>();
-        operacje = new LinkedList<>();
+        operacjeKlienta = new LinkedList<>();
     }
 
     public int getId() {
@@ -48,18 +49,27 @@ public abstract class Klient {
         konta.add(konto);
     }
 
-    public void pokazKonta(){
+    public void deleteAccByNumber(String accNumber){
         for (Konto pomKonto: konta) {
-            pomKonto.pokazSrodki();
+            if(pomKonto.getStringNumerKonta().equals(accNumber)){
+                konta.remove(pomKonto);
+            }
         }
     }
     public void dodajOperacje(Operacja operacja){
-        this.operacje.add(operacja);
+        operacjeKlienta.add(operacja);
     }
-    public void pokazOperacje(){
-        for (Operacja pomOpercaje: operacje) {
-            pomOpercaje.pokaz();
+
+    public void addOperationToAcc(Konto acc, Operacja operacja){
+        for(Konto pom:konta){
+            if(pom.equals(acc)){
+                pom.dodajOperacje(operacja);
+            }
         }
+    }
+
+    public List<Operacja> getOperacje() {
+        return operacjeKlienta;
     }
 
     public String info(){

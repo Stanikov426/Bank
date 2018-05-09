@@ -9,12 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import sample.model.bank.Account;
-import sample.model.bank.Person;
 import sample.model.bankClass.Adres;
 import sample.model.bankClass.KlientPrywatny;
 import sample.model.bankClass.Kontakt;
-import sample.model.main.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -73,7 +70,11 @@ public class regController implements Initializable {
             Adres newAdress = new Adres(city.getText(), adress.getText(), zipcode.getText());
 
             try {
-                KlientPrywatny newClient = new KlientPrywatny(idCounter, name.getText(), surname.getText(), Integer.valueOf(age.getText()));
+                int idNumber = randomId();
+                while(idNumber==0){
+                    idNumber = randomId();
+                }
+                KlientPrywatny newClient = new KlientPrywatny(idNumber, name.getText(), surname.getText(), Integer.valueOf(age.getText()));
                 newClient.dodajKontakt(contact);
                 newClient.dodajAdres(newAdress);
                 addPrivClient(newClient);
@@ -81,7 +82,6 @@ public class regController implements Initializable {
                 showError("Not correct value of age");
                 return;
             }
-            idCounter++;
 
             back();
         }

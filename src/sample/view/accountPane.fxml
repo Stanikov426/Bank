@@ -5,37 +5,42 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.accountController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.accountController">
    <children>
-      <Button fx:id="depoButton" layoutX="240.0" layoutY="142.0" mnemonicParsing="false" onAction="#depoClick" text="Deposit">
+      <Button fx:id="depoButton" layoutX="238.0" layoutY="85.0" mnemonicParsing="false" onAction="#depoClick" text="Deposit">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="withdrawButton" layoutX="230.0" layoutY="260.0" mnemonicParsing="false" onAction="#withdrawClick" text="Withdraw">
+      <Button fx:id="transferButton" layoutX="236.0" layoutY="143.0" mnemonicParsing="false" onAction="#transferClick" text="Transfer">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="logoutButton" layoutX="244.0" layoutY="321.0" mnemonicParsing="false" onAction="#logoutClick" text="Logout">
+      <Button fx:id="withdrawButton" layoutX="228.0" layoutY="200.0" mnemonicParsing="false" onAction="#withdrawClick" text="Withdraw">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Label fx:id="userLabel" layoutX="42.0" layoutY="40.0" text="Label">
+      <Button fx:id="logoutButton1" layoutX="177.0" layoutY="257.0" mnemonicParsing="false" onAction="#accOperationsClick" text="Account Operations">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="logoutButton" layoutX="244.0" layoutY="315.0" mnemonicParsing="false" onAction="#logoutClick" text="Logout">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Label fx:id="userLabel" layoutX="42.0" layoutY="14.0" text="Label">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label fx:id="cashLabel" layoutX="42.0" layoutY="83.0" text="Label">
+      <Label fx:id="cashLabel" layoutX="42.0" layoutY="46.0" text="Label">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Button fx:id="transferButton" layoutX="236.0" layoutY="200.0" mnemonicParsing="false" onAction="#transferClick" text="Transfer">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

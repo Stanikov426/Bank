@@ -1,6 +1,8 @@
 package sample.model.bankClass;
 
-public class Adres {
+import java.io.Serializable;
+
+public class Adres implements Serializable {
     private String miasto;
     private String adress;
     private String kodPocztowy;

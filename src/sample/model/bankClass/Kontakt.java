@@ -1,6 +1,8 @@
 package sample.model.bankClass;
 
-public class Kontakt {
+import java.io.Serializable;
+
+public class Kontakt implements Serializable {
     private int nrTel;
     private String email;
 

@@ -1,24 +1,25 @@
 package sample.model.bankClass;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class Konto {
+public class Konto implements Serializable {
     private double srodki;
     private String currency = "PLN";
     private int numerKonta;
     private String type;
     private String haslo;
-    private List<Operacja> operacje;
+    private List<Operacja> operacjeKonta;
 
     public Konto(int numerKonta, String haslo, double srodki){
         this.numerKonta = numerKonta;
         this.haslo = haslo;
         this.srodki = srodki;
         setType("Standard");
-        operacje = new LinkedList<>();
+        operacjeKonta = new LinkedList<>();
     }
 
     public double getSrodki() {
@@ -33,12 +34,11 @@ public class Konto {
         return "" + srodki+currency;
     }
     public void dodajOperacje(Operacja operacja){
-        this.operacje.add(operacja);
+        operacjeKonta.add(operacja);
     }
-    public void pokazOperacje(){
-        for (Operacja pomOpercaje: operacje) {
-            pomOpercaje.pokaz();
-        }
+
+    public List<Operacja> getOperacje() {
+        return operacjeKonta;
     }
 
     public String getStringNumerKonta() {

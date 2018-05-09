@@ -15,8 +15,8 @@ import sample.model.bankClass.Kontakt;
 
 import java.io.IOException;
 
-import static sample.model.main.Main.addCompanyClient;
-import static sample.model.main.Main.idCounter;
+import static sample.model.main.Main.*;
+import static sample.model.main.Main.randomId;
 
 public class regCompanyController {
     private Stage stage;
@@ -66,7 +66,11 @@ public class regCompanyController {
             Adres newAdress = new Adres(city.getText(), adress.getText(), zipcode.getText());
 
             try{
-                KlientFirmowy newClient = new KlientFirmowy(idCounter, companyName.getText(), Integer.valueOf(nip.getText()));
+                int idNumber = randomId();
+                while(idNumber==0){
+                    idNumber = randomId();
+                }
+                KlientFirmowy newClient = new KlientFirmowy(idNumber, companyName.getText(), Integer.valueOf(nip.getText()));
                 newClient.dodajKontakt(contact);
                 newClient.dodajAdres(newAdress);
                 addCompanyClient(newClient);
@@ -74,7 +78,6 @@ public class regCompanyController {
                 showError("Not correct value of nip");
                 return;
             }
-            idCounter++;
             back();
         }
         else {

@@ -8,16 +8,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
+import sample.model.bankClass.KlientFirmowy;
+import sample.model.bankClass.KlientPrywatny;
 
 import java.io.IOException;
 import java.util.Optional;
 
-import static sample.model.main.Main.test;
+import static sample.model.main.Main.deleteClientById;
+import static sample.model.main.Main.getCompanyById;
+import static sample.model.main.Main.getPrivClientById;
+
 
 public class clientController {
 
     private Stage stage;
     public static int pomId;
+    private static KlientPrywatny delClient;
+    private KlientFirmowy delCompany;
 
     @FXML
     private Button backButton;
@@ -39,7 +46,16 @@ public class clientController {
 
     @FXML
     void deleteClick(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog("0");
+        dialog.setTitle("Delete client");
+        dialog.setHeaderText("Delete client by id");
+        dialog.setContentText("Please id:");
 
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            pomId = Integer.valueOf(result.get());
+            deleteClientById(pomId);
+        }
     }
 
     @FXML

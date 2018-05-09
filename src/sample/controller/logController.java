@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import sample.model.bank.Account;
 import sample.model.bankClass.Klient;
 import sample.model.bankClass.Konto;
 import sample.model.main.Main;

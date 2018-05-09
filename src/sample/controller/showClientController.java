@@ -8,12 +8,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import sample.model.bankClass.KlientFirmowy;
 import sample.model.bankClass.KlientPrywatny;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static sample.controller.clientController.pomId;
@@ -49,7 +51,25 @@ public class showClientController implements Initializable {
 
     @FXML
     void delAccClick(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog("0");
+        dialog.setTitle("Delete account");
+        dialog.setHeaderText("Delete account by acc number");
+        dialog.setContentText("Please acc number:");
 
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            if(pomClient!=null){
+                pomClient.deleteAccByNumber(result.get());
+            }
+            else{
+                pomCompany.deleteAccByNumber(result.get());
+            }
+        }
+    }
+
+    @FXML
+    void showOperationsClick(ActionEvent event) throws IOException {
+        openPane("/sample/view/clientOperationsPane.fxml");
     }
 
     @FXML

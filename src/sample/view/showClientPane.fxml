@@ -5,29 +5,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.showClientController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.showClientController">
    <children>
       <Label fx:id="infoLabel" layoutX="14.0" layoutY="14.0" text="Label">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Button layoutX="225.0" layoutY="138.0" mnemonicParsing="false" onAction="#addAccClick" text="Add Account">
+      <Button layoutX="226.0" layoutY="125.0" mnemonicParsing="false" onAction="#addAccClick" text="Add Account">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="248.0" layoutY="248.0" mnemonicParsing="false" onAction="#showAllClick" text="Show All">
+      <Button layoutX="216.0" layoutY="178.0" mnemonicParsing="false" onAction="#delAccClick" text="Delete Account">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="213.0" layoutY="194.0" mnemonicParsing="false" onAction="#delAccClick" text="Delete Account">
+      <Button layoutX="206.0" layoutY="236.0" mnemonicParsing="false" onAction="#showOperationsClick" text="Show Operations">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="231.0" layoutY="302.0" mnemonicParsing="false" onAction="#editContactClick" text="Edit Contact">
+      <Button layoutX="243.0" layoutY="289.0" mnemonicParsing="false" onAction="#showAllClick" text="Show All">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button layoutX="229.0" layoutY="342.0" mnemonicParsing="false" onAction="#editContactClick" text="Edit Contact">
          <font>
             <Font size="20.0" />
          </font>

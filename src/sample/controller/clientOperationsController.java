@@ -10,11 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import sample.model.bankClass.KlientPrywatny;
 import sample.model.bankClass.Konto;
 import sample.model.bankClass.Operacja;
 
@@ -25,25 +23,24 @@ import java.util.ResourceBundle;
 
 import static sample.controller.showClientController.pomClient;
 import static sample.controller.showClientController.pomCompany;
-import static sample.model.main.Main.getPrivClients;
 
-public class showAccController implements Initializable {
+public class clientOperationsController implements Initializable {
     private Stage stage;
 
     @FXML
-    private Label headLabel;
+    private TableView<Operacja> operationsTable;
 
     @FXML
-    private TableView<Konto> accountTable;
+    private TableColumn<Operacja, String> dateColumn;
 
     @FXML
-    private TableColumn<Konto, String> typeColumn;
+    private TableColumn<Operacja, String> accNumberColumn;
 
     @FXML
-    private TableColumn<Konto, String> numberColumn;
+    private TableColumn<Operacja, String> toColumn;
 
     @FXML
-    private TableColumn<Konto, String> cashColumn;
+    private TableColumn<Operacja, String> descriptionColumn;
 
     @FXML
     private Button backButton;
@@ -59,33 +56,29 @@ public class showAccController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(pomClient!=null){
-            headLabel.setText(pomClient.getImie() + " Accounts");
-        }
-        else{
-            headLabel.setText(pomCompany.getNazwaFirmy()+" Accounts");
-        }
 
-        typeColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getType()));
-        numberColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getStringNumerKonta()));
-        cashColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().pokazSrodki()));
+        dateColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getStringData()));
+        accNumberColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getAccNumber()));
+        toColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getToNumber()));
+        descriptionColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getDescription()));
 
-        accountTable.setItems(getAccList());
+        operationsTable.setItems(getOperationsList());
     }
 
-    private ObservableList<Konto> getAccList() {
-        ObservableList<Konto> clientsList = FXCollections.observableArrayList();
-        List<Konto> clients = null;
+    private ObservableList<Operacja> getOperationsList() {
+        ObservableList<Operacja> operationsList = FXCollections.observableArrayList();
+        List<Operacja> operations = null;
         if(pomClient!=null){
-            clients = pomClient.getKonta();
+            operations = pomClient.getOperacje();
         }
         else{
-            clients = pomCompany.getKonta();
+            operations = pomCompany.getOperacje();
         }
-        for (Konto num : clients) {
-            clientsList.add(num);
+        for (Operacja pom : operations) {
+            operationsList.add(pom);
         }
 
-        return clientsList;
+        return operationsList;
     }
 }
+

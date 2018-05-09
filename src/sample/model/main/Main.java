@@ -5,21 +5,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.model.bank.Bank;
 import sample.model.bankClass.*;
 
-import java.util.List;
-import java.util.LinkedList;
+import java.util.*;
+
+import static sample.model.database.JacksonCoverterToJSON.saveJSON;
+import static sample.model.database.SaveReadClass.*;
 
 public class Main extends Application {
-    public static int idCounter = 0;
-    public static Bank test = new Bank();
     private static List<KlientPrywatny> privClients = new LinkedList<>();
     private static List<KlientFirmowy> companyClients = new LinkedList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //test.importFromDatabase();
         Parent root = FXMLLoader.load(getClass().getResource("/sample/view/mainMenu.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setTitle("Bank System");
@@ -29,25 +27,60 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        KlientPrywatny test = new KlientPrywatny(0,"Michal","Staniszewski",20);
-        Kontakt testkon = new Kontakt(515192129,"M@wp.pl");
-        Adres adrespom = new Adres("Rutki","Lomzynska 23", "18-312");
-        test.dodajAdres(adrespom);
-        test.dodajKontakt(testkon);
-        idCounter++;
-        addPrivClient(test);
-        launch(args);
-        for (KlientPrywatny pom: privClients) {
-            System.out.println(pom.info());
+        readSetupTxt();
+        Set<String> listOfClientsId = getSetupList();
+        for(String pom:listOfClientsId){
+            addPrivClient(readPrivClients(pom));
         }
+        for(String pom:listOfClientsId){
+            addCompanyClient(readCompanyClients(pom));
+        }
+
+        /*
+        Date d = new Date();
+        KlientPrywatny test = new KlientPrywatny(1,"Michal","Stanikov",59);
+        Kontakt k = new Kontakt(51515, "SADA@wp.pl");
+        Adres a = new Adres("asda", "asd,sad", "trtttt");
+        Konto ko = new Konto(0,"123",200);
+        Operacja o = new Operacja(ko, ko,d, "Tstujes");
+        test.dodajAdres(a);
+        test.dodajKontakt(k);
+        test.dodajKonto(ko);
+        test.dodajOperacje(o);
+        saveJSON(test);
+        */
+
+        launch(args);
+        saveClients();
+    }
+
+    public static int randomId(){
+        Random r = new Random();
+        int x = r.nextInt(1000);
+        System.out.println(x);
+        for (KlientPrywatny pom: privClients) {
+            if (pom.getId() == x) {
+                return 0;
+            }
+        }
+        for (KlientFirmowy pom: companyClients) {
+            if (pom.getId() == x) {
+                return 0;
+            }
+        }
+        return x;
     }
 
     public static void addPrivClient(KlientPrywatny client){
-        privClients.add(client);
+        if(client!=null){
+            privClients.add(client);
+        }
     }
 
     public static void addCompanyClient(KlientFirmowy client){
-        companyClients.add(client);
+        if(client!=null){
+            companyClients.add(client);
+        }
     }
 
     public static List<KlientPrywatny> getPrivClients() {
@@ -127,4 +160,36 @@ public class Main extends Application {
         }
         return null;
     }
+    public static void deleteClientById(int idNumber){
+        for (Klient pom: privClients) {
+            if(pom.getId()==idNumber){
+                privClients.remove(pom);
+                deleteFile(pom.getStringId());
+                return;
+            }
+        }
+        for (Klient pom: companyClients) {
+            if(pom.getId()==idNumber){
+                companyClients.remove(pom);
+                deleteFile(pom.getStringId());
+                return;
+            }
+        }
+    }
+
+    private static void saveClients(){
+        System.out.println("Saving Clients");
+        for (Klient pom: privClients) {
+            saveClient(pom);
+            //Save to JSON
+            //saveJSON(pom);
+        }
+        System.out.println("Saving Companies");
+        for (Klient pom: companyClients) {
+            saveClient(pom);
+            //Save to JSON
+            //saveJSON(pom);
+        }
+    }
+
 }
